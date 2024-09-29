@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,16 +35,43 @@ namespace ToDoItem_Console
 
         public static void CompleteTask()
         {
-            Console.WriteLine("Wybierz numer zadania do zakończenia:");
-            int index = int.Parse(Console.ReadLine()) - 1;
+            Console.WriteLine("Jesli chcesz zakończyć zadanie: po numerze zadania - wpisz 1; po nazwie zadania - wpisz 2.");
+            var choice = Console.ReadLine();
 
-            if (index >= 0 && index < toDoList.Count)
+            switch (choice)
             {
-                toDoList[index].IsCompleted = true;
-            }
-            else
-            {
-                Console.WriteLine("Nieprawidłowy numer zadania.");
+                case "1":
+                    Console.WriteLine("Wybierz numer zadania do zakończenia:");
+                    int index = int.Parse(Console.ReadLine()) - 1;
+
+                    if ((index >= 0 && index < toDoList.Count))
+                    {
+                        toDoList[index].IsCompleted = true;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Nieprawidłowy numer zadania.");
+                    }
+                    break;
+                case "2":
+                    Console.WriteLine("Wybierz zadanie do zakończenia:");
+                    string taskName = Console.ReadLine();
+                    var item = toDoList.Find(t => t.Task.Equals(taskName, StringComparison.OrdinalIgnoreCase));
+
+                    if (item != null)
+                    {
+                        item.IsCompleted = true;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Nieprawidłowy numer zadania.");
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Nieprawidłowy wybór. Spróbuj ponownie.");
+                    break;
             }
         }
 
