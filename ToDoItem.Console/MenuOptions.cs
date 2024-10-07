@@ -35,7 +35,7 @@ namespace ToDoItem_Console
 
         public static void CompleteTask()
         {
-            Console.WriteLine("Jesli chcesz zakończyć zadanie: po numerze zadania - wpisz 1; po nazwie zadania - wpisz 2.");
+            Console.WriteLine("... po numerze zadania - 1, po nazwie zadania - 2");
             var choice = Console.ReadLine();
 
             switch (choice)
@@ -120,6 +120,45 @@ namespace ToDoItem_Console
                 }
                 Console.WriteLine("Zadania zostały załadowane.");
             }
+        }
+
+        public static void OrderBy()
+        {
+            Console.WriteLine("... według: 1 <- Statusu zadań, 2 <- Alfabetycznie, 3 <- Wróć do menu głownego");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    OrderByStatus();
+                    break;
+                case "2":
+                    OrderByName();
+                    break;
+                case "3":
+                    break;
+                default:
+                    Console.WriteLine("Nieprawidłowy wybór. Spróbuj ponownie.");
+                    break;
+            }
+        }
+
+        private static void OrderByName()
+        {
+            List<ToDoItem> orderedList = new List<ToDoItem>();
+            orderedList = toDoList.OrderBy(x => x.Task).ToList();
+
+            foreach (ToDoItem item in orderedList)
+            {
+                string status = item.IsCompleted ? "[X]" : "[ ]";
+                Console.WriteLine($"{item.Task} {status}");
+            }
+
+            toDoList = orderedList;
+        }
+
+        private static void OrderByStatus()
+        {
+            throw new NotImplementedException();
         }
     }
 }

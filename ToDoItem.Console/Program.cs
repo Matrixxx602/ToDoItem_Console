@@ -10,7 +10,8 @@
             {
                 Console.WriteLine("ToDo List:");
                 MenuOptions.ShowTasks();
-                Console.WriteLine("Wybierz opcję: 1 - Dodaj zadanie, 2 - Zakończ zadanie, 3 - Usuń zadanie, 4 - Zapisz i Wyjdź");
+                Console.WriteLine("Wybierz opcję: 1 <- Dodaj zadanie, 2 <- Zakończ zadanie..., 3 <- Usuń zadanie,");
+                Console.WriteLine("4 <- Uporządkuj zadania..., 5 <- Zapisz i Wyjdź");
                 string choice = Console.ReadLine();
 
                 switch (choice)
@@ -25,6 +26,9 @@
                         MenuOptions.RemoveTask();
                         break;
                     case "4":
+                        MenuOptions.OrderBy();
+                        break;
+                    case "5":
                         MenuOptions.SaveTasks();
                         return;
                     default:
@@ -35,7 +39,6 @@
         }
     }
 }
-//Zapis danych: Użyj plików tekstowych lub bazy danych do przechowywania zadań.
 
 //Interfejs graficzny: Rozważ użycie Windows Forms lub WPF do stworzenia interfejsu użytkownika.
 
