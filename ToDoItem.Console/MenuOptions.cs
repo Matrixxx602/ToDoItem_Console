@@ -35,7 +35,7 @@ namespace ToDoItem_Console
 
         public static void CompleteTask()
         {
-            Console.WriteLine("... po numerze zadania - 1, po nazwie zadania - 2");
+            Console.WriteLine("...: 1 <- po numerze zadania, 2 <- po nazwie zadania");
             var choice = Console.ReadLine();
 
             switch (choice)
@@ -158,7 +158,16 @@ namespace ToDoItem_Console
 
         private static void OrderByStatus()
         {
-            throw new NotImplementedException();
+            List<ToDoItem> orderedList = new List<ToDoItem>();
+            orderedList = toDoList.OrderBy(x => x.IsCompleted).ToList();
+
+            foreach (var item in orderedList)
+            {
+                string status = item.IsCompleted ? "[x]" : "[ ]";
+                Console.WriteLine($"{status} {item.Task}");
+            }
+
+            toDoList =orderedList;
         }
     }
 }
